@@ -4,9 +4,9 @@ import { Container, Row } from "react-bootstrap";
 import { ProductGridWrapper } from "../ProductThumb";
 
 const ProductTab = ({ newProducts, popularProducts, saleProducts }) => {  
-  console.log(newProducts)
-    console.log(popularProducts)
-    console.log(saleProducts)
+  // console.log(newProducts)
+  //   console.log(popularProducts)
+  //   console.log(saleProducts)
   return (
     <div className="product-tab space-mb--r100">
       <Container>

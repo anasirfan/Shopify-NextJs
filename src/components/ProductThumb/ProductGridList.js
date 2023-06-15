@@ -22,21 +22,22 @@ const ProductGridList = ({
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch();
 
+
   return (
     <Fragment>
       <Col lg={3} md={6} className={clsx(bottomSpace)}>
         <div className="product-grid">
           {/*=======  single product image  =======*/}
           <div className="product-grid__image">
-            <Anchor path={`/shop/product-basic/${product.slug}`} className="image-wrap">
+            <Anchor path={`/shop/product-basic/${product.node.handle}`} className="image-wrap">
                 <img
-                  src={process.env.PUBLIC_URL + product.thumbImage[0]}
+                  src={product.node.images.edges[0].node.originalSrc}
                   className="img-fluid"
                   alt={product.name}
                 />
-                {product.thumbImage.length > 1 ? (
+                {product.node.images.edges[0].node.originalSrclength > 0 ? (
                   <img
-                    src={process.env.PUBLIC_URL + product.thumbImage[1]}
+                    src={product.node.images.edges[0].node.originalSrc}
                     className="img-fluid"
                     alt={product.name}
                   />
@@ -176,13 +177,13 @@ const ProductGridList = ({
           <div className="product-list__image">
             <Anchor path={`/shop/product-basic/${product.slug}`} className="image-wrap">
                 <img
-                  src={process.env.PUBLIC_URL + product.thumbImage[0]}
+                  src={product.node.images.edges[0].node.originalSrc}
                   className="img-fluid"
                   alt={product.name}
                 />
-                {product.thumbImage.length > 1 ? (
+                {product.node.images.edges[0].node.originalSrc.length > 0 ? (
                   <img
-                    src={process.env.PUBLIC_URL + product.thumbImage[1]}
+                    src={product.node.images.edges[0].node.originalSrc}
                     className="img-fluid"
                     alt={product.name}
                   />
@@ -283,14 +284,14 @@ const ProductGridList = ({
               </h3>
             </div>
             <div className="price">
-              {product.discount > 0 ? (
+              {/* {product.discount > 0 ? (
                 <Fragment>
                   <span className="main-price discounted">${productPrice}</span>
                   <span className="discounted-price">${discountedPrice}</span>
                 </Fragment>
-              ) : (
+              ) : ( */}
                 <span className="main-price">${productPrice}</span>
-              )}
+             
             </div>
 
             <div className="short-description">{product.shortDescription}</div>

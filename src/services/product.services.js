@@ -50,6 +50,46 @@ export async function fetchAllCollections() {
   return collections;
 }
 
+export async function fetchProductsByType(productType) {
+  const query = `
+    query FetchProductsByType($productType: String!) {
+      products(first: 10, query: "product_type:${productType}") {
+        edges {
+          node {
+            id
+            title
+            handle
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+            }
+            images(first: 5) {
+              edges {
+                node {
+                  url
+                  altText
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    productType: productType,
+  };
+
+  const response = await ShopifyData(query, variables);
+  const productsByCategory = response;
+
+  return productsByCategory;
+
+  
+}
+
 export async function fetchAllCategories() {
   const query = `
     query FetchAllCategories($cursor: String) {

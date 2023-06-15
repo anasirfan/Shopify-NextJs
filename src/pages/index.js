@@ -5,7 +5,7 @@ import { ProductTab } from '../components/ProductTab';
 import { ImageCta } from '../components/Cta';
 import heroSliderData from '../data/hero-sliders/hero-slider-one.json';
 import imageCtaData from '../data/image-cta/image-cta-one.json';
-import { recursiveCatalog, fetchAllCollections, fetchAllCategories } from '../services/product.services';
+import { recursiveCatalog, fetchAllCollections, fetchAllCategories,fetchProductsByType  } from '../services/product.services';
 
 const Home = () => {
   const [newProducts, setNewProducts] = useState([]);
@@ -19,6 +19,9 @@ const Home = () => {
     const fetchedProducts = await recursiveCatalog();
     const fetchedCollections = await fetchAllCollections();
     const fetchedCategories = await fetchAllCategories();
+    const productsByCategory = await fetchProductsByType('clothing');
+  console.log(productsByCategory);
+
   
     // Filter the products based on your criteria
     const newProducts = fetchedProducts.slice(0, 12);
@@ -27,7 +30,7 @@ const Home = () => {
   
     // console.log("Fetched Products:", fetchedProducts);
     // console.log("Fetched Collections:", fetchedCollections);
-    console.log("Fetched Categories:", fetchedCategories);
+    // console.log("Fetched Categories:", fetchedCategories);
     // console.log("New Products:", newProducts);
     // console.log("Popular Products:", popularProducts);
     // console.log("Sale Products:", saleProducts);
@@ -36,6 +39,8 @@ const Home = () => {
     setPopularProducts(popularProducts);
     setSaleProducts(saleProducts);
   }
+
+  
 
   return (
     <LayoutOne aboutOverlay={false}>
