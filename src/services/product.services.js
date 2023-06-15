@@ -52,7 +52,7 @@ export async function fetchAllCollections() {
 
 export async function fetchProductsByType(productType) {
   const query = `
-    query FetchProductsByType($productType: String!) {
+    query  {
       products(first: 10, query: "product_type:${productType}") {
         edges {
           node {
@@ -83,11 +83,13 @@ export async function fetchProductsByType(productType) {
   };
 
   const response = await ShopifyData(query, variables);
-  const productsByCategory = response;
 
-  return productsByCategory;
-
-  
+  if (response.data && response.data.products && response.data.products.edges) {
+    const productsByCategory = response.data.products.edges.map((edge) => edge.node);
+    return productsByCategory;
+  } else {
+    throw  Error('Failed to fetch products');
+  }
 }
 
 export async function fetchAllCategories() {
